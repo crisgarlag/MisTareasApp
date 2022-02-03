@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTintMode="add"
+    tools:context=".RegistroActivity">
+
+    <ImageView
+        android:id="@+id/fondoLoginRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.2"
+        android:contentDescription="@string/imagen_de_fondo"
+        android:scaleType="fitXY"
+        android:src="@mipmap/fonfolapiz" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="200dp"
+        app:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textoLoginRegistro"
+            style="@style/etiquetas"
+            android:onClick="volverLogin"
+            android:text="@string/login"
+            android:textColor="@color/secondaryText" />
+
+        <TextView
+            android:id="@+id/textoRegistrarRegistro"
+            android:layout_marginStart="20dp"
+            android:text="@string/registrar"
+            style="@style/etiquetas"
+            android:textStyle="bold" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/usuario"
+            app:boxBackgroundColor="@color/lightPrimaryColor"
+            app:boxStrokeColor="@color/colorPrimaryDark"
+            app:hintTextColor="@color/accentColor"
+            app:startIconDrawable="@drawable/usuario"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usuarioRegistro"
+                style="@style/textInput"
+                >
+
+                <requestFocus />
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/pass"
+            app:boxBackgroundColor="@color/lightPrimaryColor"
+            app:boxStrokeColor="@color/colorPrimaryDark"
+            app:hintTextColor="@color/accentColor"
+            app:startIconDrawable="@drawable/candado">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordRegistro"
+                style="@style/textInput"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/botonRegistro"
+        style="@style/botones"
+        android:layout_below="@+id/linearLayoutRegistro"
+        android:onClick="usuarioNuevo"
+        android:text="@string/registrar"
+        app:icon="@drawable/icono_registro"
+        app:iconSize="30dp"
+        app:iconTint="@color/colorPrimaryDark"/>
+
+
+</RelativeLayout>

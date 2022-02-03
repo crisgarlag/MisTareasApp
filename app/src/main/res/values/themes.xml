@@ -1,0 +1,56 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MisTareas" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/accentColor</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/lightPrimaryColor</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="botones">
+        <item name="android:layout_width">199dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_below">@+id/linearLayout</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginTop">25dp</item>
+        <item name="cornerRadius">25dp</item>
+        <item name="backgroundTint">@color/accentColor</item>
+        <item name="rippleColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="etiquetas">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="textInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="textInputLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:hint">@string/usuario</item>
+        <item name="boxStrokeColor">@color/colorPrimaryDark</item>
+        <item name="boxBackgroundColor">@color/lightPrimaryColor</item>
+        <item name="hintTextColor">@color/accentColor</item>
+    </style>
+
+</resources>

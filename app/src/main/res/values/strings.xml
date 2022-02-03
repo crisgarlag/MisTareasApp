@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MisTareas</string>
+    <string name="mis_tareas">Mis Tareas</string>
+    <string name="imagen_de_fondo">imagen de fondo</string>
+    <string name="edix">Edix</string>
+    <string name="usuario">Usuario</string>
+    <string name="pass">Contraseña</string>
+    <string name="login">LOGIN</string>
+    <string name="crea_una_cuenta">Crea una cuenta</string>
+    <string name="terminado">Terminado</string>
+    <string name="registrar">REGISTRO</string>
+    <string name="botonflotante">botonFlotante</string>
+    <string name="logo">logo</string>
+    <string name="tarea">tarea</string>
+    <string name="modificar">modificar</string>
+    <string name="flechaatras">flechaAtras</string>
+</resources>
