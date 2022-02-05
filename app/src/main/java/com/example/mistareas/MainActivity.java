@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         View parent = (View) view.getParent();
         TextView textoTarea = parent.findViewById(R.id.taskTitle);
+        int idUsuario = this.getIntent().getExtras().getInt("idUsuario");
         EditText cajaTexto = new EditText(this);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Modificar Tarea")
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Modificar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        controladorDB.modificarTarea(textoTarea.getText().toString(), cajaTexto.getText().toString());
+                        controladorDB.modificarTarea(textoTarea.getText().toString(), cajaTexto.getText().toString(),idUsuario);
                         toastPersonalizado("Tarea modificada correctamente");
                         actualizarUI();
                     }
@@ -175,7 +176,8 @@ public class MainActivity extends AppCompatActivity {
     public void borrarTarea(View view) {
         View parent = (View) view.getParent();
         TextView tareaTextView = (TextView) parent.findViewById(R.id.taskTitle);
-        controladorDB.borrarTarea(tareaTextView.getText().toString());
+        int idUsuario = this.getIntent().getExtras().getInt("idUsuario");
+        controladorDB.borrarTarea(tareaTextView.getText().toString(), idUsuario);
         actualizarUI();
         toastPersonalizado("Tarea eliminada correctamente");
 

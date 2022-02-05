@@ -99,13 +99,13 @@ public class ControladorDB extends SQLiteOpenHelper {
     }
 
     /**
-     * Borra la tarea pasada como parametros de la tabla tareas de la bbdd
-     *
+     *  Borra la tarea pasada como parametros de la tabla tareas de la bbdd
      * @param tarea a borrar
+     * @param idUsuario del usuario al que pertenece la tarea
      */
-    public void borrarTarea(String tarea) {
+    public void borrarTarea(String tarea, int idUsuario) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("TAREAS", "NOMBRE=?", new String[]{tarea});
+        db.delete("TAREAS", "NOMBRE=? AND USERID=?", new String[]{tarea, String.valueOf(idUsuario)});
         db.close();
     }
 
@@ -114,13 +114,14 @@ public class ControladorDB extends SQLiteOpenHelper {
      *
      * @param tareaActual es la tarea existente en la bbdd
      * @param tareaNueva  es la que va a modificar a la existente
+     * @param idUsuario del usuario al que pertenece la tarea
      */
-    public void modificarTarea(String tareaActual, String tareaNueva) {
+    public void modificarTarea(String tareaActual, String tareaNueva, int idUsuario) {
 
         ContentValues registro = new ContentValues();
         registro.put("nombre", tareaNueva);
         SQLiteDatabase db = this.getWritableDatabase();
-        db.update("tareas", registro, "nombre=?", new String[]{tareaActual});
+        db.update("tareas", registro, "nombre=? and userid=?", new String[]{tareaActual, String.valueOf(idUsuario)});
     }
 
     /**
