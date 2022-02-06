@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.mistareas.db.ControladorDB;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+
 /**
  * Clase que se encarga de la activity main
  */
@@ -92,10 +93,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Crea una ventana emergente tras pulsar el boton flotante. El texto introducido
      * en el textView que aparece será insertado en la tabla tareas de la bbdd
+     * siempre y cuando no exista ya otra tarea con el mismo nombre para el usuario.
      */
     public void añadirTarea() {
         EditText cajaTexto = new EditText(this);
-        int dato = this.getIntent().getExtras().getInt("idUsuario");
+        int idUsuario = this.getIntent().getExtras().getInt("idUsuario");
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Nueva Tarea")
                 .setMessage("¿Qué quieres hacer a continuacion?")
@@ -103,14 +105,19 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Añadir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        controladorDB.addTarea(cajaTexto.getText().toString(), dato);
-                        toastPersonalizado("Tarea añadida correctamente");
-                        actualizarUI();
+                        String tarea = cajaTexto.getText().toString();
+                        if (!controladorDB.comprobarTareaUsuario(tarea, idUsuario)) {
+                            controladorDB.addTarea(tarea, idUsuario);
+                            toastPersonalizado("Tarea añadida correctamente");
+                            actualizarUI();
+                        } else {
+                            toastPersonalizado("Ya existe la tarea");
+                            actualizarUI();
+                        }
                     }
                 })
                 .setNegativeButton("Cancelar", null)
                 .create();
-
         dialog.show();
 
     }
@@ -118,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Crea una ventana emergente tras pulsar el boton flotante. El texto introducido
      * en el textView que aparece modificará la tarea que ya existe en la tabla tareas de la bbdd
+     * siempre y cuando no exista ya otra tarea con el mismo nombre para el usuario.
      */
     public void modificarTarea(View view) {
 
@@ -132,9 +140,17 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Modificar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        controladorDB.modificarTarea(textoTarea.getText().toString(), cajaTexto.getText().toString(),idUsuario);
-                        toastPersonalizado("Tarea modificada correctamente");
-                        actualizarUI();
+                        String tareaNueva = cajaTexto.getText().toString();
+                        String tareaVieja = textoTarea.getText().toString();
+                        if (!controladorDB.comprobarTareaUsuario(tareaNueva, idUsuario)) {
+                            controladorDB.modificarTarea(tareaVieja, tareaNueva, idUsuario);
+                            toastPersonalizado("Tarea modificada correctamente");
+                            actualizarUI();
+                        } else {
+                            toastPersonalizado("Ya existe la tarea");
+                            actualizarUI();
+                        }
+
                     }
                 })
                 .setNegativeButton("Cancelar", null)
@@ -171,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Pulsando sobre checkbox elimina la tarea de la bbdd
+     *
      * @param view
      */
     public void borrarTarea(View view) {

@@ -42,14 +42,12 @@ public class ControladorDB extends SQLiteOpenHelper {
      * @param usuario quien realiza la tarea
      */
     public void addTarea(String tarea, int usuario) {
-
         ContentValues registro = new ContentValues();
         registro.put("nombre", tarea);
         registro.put("userID", usuario);
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert("tareas", null, registro);
         db.close();
-
     }
 
     /**
@@ -99,11 +97,13 @@ public class ControladorDB extends SQLiteOpenHelper {
     }
 
     /**
-     *  Borra la tarea pasada como parametros de la tabla tareas de la bbdd
-     * @param tarea a borrar
+     * Borra la tarea pasada como parametros de la tabla tareas de la bbdd
+     *
+     * @param tarea     a borrar
      * @param idUsuario del usuario al que pertenece la tarea
      */
     public void borrarTarea(String tarea, int idUsuario) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("TAREAS", "NOMBRE=? AND USERID=?", new String[]{tarea, String.valueOf(idUsuario)});
         db.close();
@@ -114,7 +114,7 @@ public class ControladorDB extends SQLiteOpenHelper {
      *
      * @param tareaActual es la tarea existente en la bbdd
      * @param tareaNueva  es la que va a modificar a la existente
-     * @param idUsuario del usuario al que pertenece la tarea
+     * @param idUsuario   del usuario al que pertenece la tarea
      */
     public void modificarTarea(String tareaActual, String tareaNueva, int idUsuario) {
 
@@ -203,6 +203,26 @@ public class ControladorDB extends SQLiteOpenHelper {
         }
 
         return passwordQuery;
+    }
+
+    /**
+     * Comprueba si la tarea que va a añadir el usuario ya existe en la bbdd
+     *
+     * @param tarea     a añadir
+     * @param idUsuario del usuario que añade la tarea
+     * @return true si existe y false si no existe
+     */
+    public boolean comprobarTareaUsuario(String tarea, int idUsuario) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT nombre FROM tareas WHERE nombre=? and userID=?", new String[]{tarea, String.valueOf(idUsuario)});
+        int registro = cursor.getCount();
+        cursor.close();
+        if (registro == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
